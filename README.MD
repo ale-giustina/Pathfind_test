@@ -10,29 +10,24 @@ Almost all the mazes were generated with Kees Meijer maze generator found at htt
 
 ### Fully connected maze without removing walls
 
-<img alt="Maze 3" src="Mazes/prove/prova_3_goal_y_199_x_199.png" width=200> <img alt="Maze 3 solved" src="Mazes/prove/maze-solved-3.png" width=200>
+<img alt="Maze 3" src="Mazes/prove/prova_3_goal_y_199_x_199.png" width=400> <img alt="Maze 3 solved" src="Mazes/prove/maze-solved-3.png" width=400>
 
-<img alt="Maze 4" src="Mazes/prove/prova_4_goal_y_99_x_99.png" width=400>
-<img alt="Maze 4 solved" src="Mazes/prove/maze-solved-4.png" width=400>
+<img alt="Maze 4" src="Mazes/prove/prova_4_goal_y_99_x_99.png" width=400> <img alt="Maze 4 solved" src="Mazes/prove/maze-solved-4.png" width=400>
 
 ### Maze with removed walls
 
-<img alt="Maze 5" src="Mazes\Wout_walls\maze_20x20_wout_walls_goal_39_39.png" width=400>
-<img alt="Maze 5 solved" src="Mazes\Wout_walls\maze-solved_20x20_wout_walls.png" width=400>
+<img alt="Maze 5" src="Mazes\Wout_walls\maze_20x20_wout_walls_goal_39_39.png" width=400> <img alt="Maze 5 solved" src="Mazes\Wout_walls\maze-solved_20x20_wout_walls.png" width=400>
 
 
 ## Example output
 
 ### Fully connected maze without removing walls
-<img alt="Maze 6" src="Images\GIFS\prova_4_goal_y_99_x_99.gif" width=400>
-<img alt="Maze 6 solved" src="Mazes\prove\maze-solved-4.png" width=400>
+<img alt="Maze 6" src="Images\GIFS\prova_4_goal_y_99_x_99.gif" width=400> <img alt="Maze 6 solved" src="Mazes\prove\maze-solved-4.png" width=400>
 
-<img alt="Maze 6" src="Images\GIFS\maze_208x208_2_goal_415_415.gif" width=400>
-<img alt="Maze 6 solved" src="Mazes\maze-solved_208x208_2.png" width=400>
+<img alt="Maze 6" src="Images\GIFS\maze_208x208_2_goal_415_415.gif" width=400> <img alt="Maze 6 solved" src="Mazes\maze-solved_208x208_2.png" width=400>
 
 ### Maze with removed walls
-<img alt="Maze 7" src="Images\GIFS\maze_20x20_wout_walls_goal_39_39.gif" width=400>
-<img alt="Maze 7 solved" src="Mazes\Wout_walls\maze-solved_20x20_wout_walls.png" width=400>
+<img alt="Maze 7" src="Images\GIFS\maze_20x20_wout_walls_goal_39_39.gif" width=400> <img alt="Maze 7 solved" src="Mazes\Wout_walls\maze-solved_20x20_wout_walls.png" width=400>
 
 # example with goal in the center
 <img alt="Maze 8" src="Images\GIFS\maze_50x50_minus_300_walls.gif" width=400>
