@@ -56,6 +56,33 @@ lab_list = [[
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]]
 
+def block_v(path, lab):
+  for i in path:
+    lab[i[0]][i[1]] = 0.3
+  return lab
+
+#convert to rgb: 1 = black, 0 = white, 0.5 = yellow, 0.7 = green, 0.2 = light_green, 0.3 = light_red
+def to_rgb(lab):
+  result = []
+  for i in lab:
+    row = []
+    for j in i:
+      if j == 1:
+        row.append([0,0,0])
+      elif j == 0:
+        row.append([1,1,1])
+      elif j == 0.5:
+        row.append([1,1,0])
+      elif j == 0.7:
+        row.append([0,1,0])
+      elif j == 0.2:
+        row.append([0,1,0.5])
+      elif j == 0.3:
+        row.append([1,0,0])
+      elif j == 0.9:
+        row.append([0,0,1])
+    result.append(row)
+  return result
 
 
 def move(direction, start, lab):
@@ -130,7 +157,9 @@ def check_surroundings(start, lab):
 
   return result
 
-filepath = "prova_3_goal_y_199_x_199.png"
+filename = "maze_100x100_goal_199_199"
+
+filepath = f"Mazes/{filename}.png"
 
 try:
   lab = to_list(filepath)
@@ -150,21 +179,20 @@ for i in range(len(lab)):
 if goal == None:
   goal = [199, 199] #y x
 
-show_start = True # show at the start
+maxiter = 20000
 
 show = True # show the process
 
-showevery = 75
+showevery = 10
 
+showcolor = True
+
+block_vicoli = True
 
 if lab[goal[0]][goal[1]] != 0.5:
   lab[goal[0]][goal[1]] = 0.5
 
 lab[start[0]][start[1]] = 0.7
-
-if show_start:
-  plt.imshow(lab)
-  plt.show()
 
 facing = Facing(check_surroundings(start, lab).index(True),3) #0 down 1 west 2 up 3 east
 
@@ -201,19 +229,18 @@ while not found:
       found = True
       break
 
-    lab[start[0]][start[1]] = 0.2  
-
   elif (check_surroundings(start, lab).count(False) < 2 and not vicolo_cieco) or (check_surroundings(start, lab).count(False) == 2 and iter == 0):
     
     freeways = check_surroundings(start, lab)
     
     if iter != 0:
       freeways[facing.increment(2)] = False
-
+    
+    
     nodes.append([start,freeways])
 
     start = move(facing.set(nodes[-1][1].index(True)),start,lab)
-    
+
     shortest_path.append([start])
 
     if lab[start[0]][start[1]] == 0.2:
@@ -226,18 +253,19 @@ while not found:
       found = True
       break
 
-    lab[start[0]][start[1]] = 0.2
-  
   elif check_surroundings(start, lab).count(False) == 3 or vicolo_cieco:
 
+    if block_vicoli: lab = block_v(shortest_path[-1],lab)
     shortest_path.pop(-1)
 
     while nodes[-1][1].count(True) == 0:
       nodes.pop(-1)
+      if block_vicoli: lab = block_v(shortest_path[-1],lab)
+      shortest_path.pop(-1)
     
     start = move(facing.set(nodes[-1][1].index(True)),nodes[-1][0],lab)
-    
-    shortest_path[-1].append(start)
+
+    shortest_path.append([start])
 
     nodes[-1][1][nodes[-1][1].index(True)] = False
 
@@ -246,31 +274,39 @@ while not found:
       found = True
       break
 
-    lab[start[0]][start[1]] = 0.2
-
     vicolo_cieco = False
     
   if iter % 1000 == 0:
     print(f"iterazione {iter}")
   
-  if iter % showevery == 0:
+  if (iter % showevery == 0) and show==True:
     lab_copy = [row.copy() for row in lab]
     lab_copy[start[0]][start[1]] = 0.7
+    if showcolor:
+      lab_copy = to_rgb(lab_copy)
     im = ax.imshow(lab_copy, animated=True)
     ims.append([im])
 
+  lab[start[0]][start[1]] = 0.2
+
   iter+=1
-  if iter>20000:
+  if iter>maxiter:
     break
 
 for i in shortest_path:
   for j in i:
     lab[j[0]][j[1]] = 0.7
   lab_copy = [row.copy() for row in lab]
+  if showcolor:
+    lab_copy = to_rgb(lab_copy)
   im = ax.imshow(lab_copy, animated=True)
   ims.append([im])
 
-for i in range(35):
+lab_copy = [row.copy() for row in lab]
+if showcolor:
+  lab_copy = to_rgb(lab_copy)
+im = ax.imshow(lab_copy, animated=True)
+for i in range(40):
   ims.append([im])
 
 if found == True:
@@ -278,9 +314,6 @@ if found == True:
 else:
   print("labirinto non risolto")
 
-plt.imshow(ims[-1][0].get_array())
-plt.show()
 
 ani = animation.ArtistAnimation(fig, ims, interval=50, blit=True, repeat_delay=1000)
-ani.save(filename="lab_1.mp4", writer="ffmpeg")
-plt.show()
+ani.save(filename=f"Video/{filename}.mp4", writer="ffmpeg")
