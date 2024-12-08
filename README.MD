@@ -10,8 +10,8 @@ Almost all the mazes were generated with Kees Meijer maze generator found at htt
 
 ### Fully connected maze without removing walls
 
-<img alt="Maze 3" src="Mazes/prove/prova_3_goal_y_199_x_199.png" width=400>
-<img alt="Maze 3 solved" src="Mazes/prove/maze-solved-3.png" width=400>
+<img alt="Maze 3" src="Mazes/prove/prova_3_goal_y_199_x_199.png" width=350>
+<img alt="Maze 3 solved" src="Mazes/prove/maze-solved-3.png" width=350>
 
 <img alt="Maze 4" src="Mazes/prove/prova_4_goal_y_99_x_99.png" width=400>
 <img alt="Maze 4 solved" src="Mazes/prove/maze-solved-4.png" width=400>
