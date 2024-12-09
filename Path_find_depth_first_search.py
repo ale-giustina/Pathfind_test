@@ -150,7 +150,7 @@ showcolor = True #show the process in color
 
 debug = False #show (don't save) the final image
 
-random_dir = True #at intersections don't always go left
+random_dir = False #at intersections don't always go left
 
 try:
   lab = to_list(filepath)
@@ -225,6 +225,7 @@ while not found:
       facing.set(choosen_dir)
     else:
       facing.set(nodes[-1][1].index(True))
+      choosen_dir = facing.get()
 
     #start going to the first possible direction
     start = move(facing.get(),start,lab)
@@ -267,6 +268,7 @@ while not found:
       facing.set(choosen_dir)
     else:
       facing.set(nodes[-1][1].index(True))
+      choosen_dir = facing.get()
 
     #move to the last node
     start = move(facing.get(),nodes[-1][0],lab)
