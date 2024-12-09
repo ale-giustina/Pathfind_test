@@ -21,7 +21,7 @@ Almost all the mazes were generated with Kees Meijer maze generator found at htt
 
 ## Example output
 
-### Fully connected maze without removing walls
+### Fully connected maze without removing walls (random_dir=False)
 <img alt="Maze 6" src="Images\GIFS\prova_4_goal_y_99_x_99.gif" width=400> <img alt="Maze 6 solved" src="Mazes\prove\maze-solved-4.png" width=400>
 
 <img alt="Maze 8" src="Images\GIFS\maze_208x208_2_goal_415_415.gif" width=400> <img alt="Maze 8 solved" src="Mazes\maze-solved_208x208_2.png" width=400>
@@ -30,7 +30,11 @@ Almost all the mazes were generated with Kees Meijer maze generator found at htt
 
 <img alt="Maze 10" src="Images\GIFS\maze_209x209_4_goal_417_417.gif" width=400> <img alt="Maze 10 solved" src="Mazes\maze-solved_209x209_4.png" width=400>
 
+### Fully connected maze without removing walls (random_dir=True) lucky and unlucky scenarios
 
+<img alt="Maze 11 lucky" src="Images\GIFS\maze_209x209_3_goal_417_417_random_dir_lucky.gif" width=400> <img alt="Maze 11 solved" src="Mazes\maze-solved_209x209_3.png" width=400> <img alt="Maze 11 unlucky" src="Images\GIFS\maze_209x209_3_goal_417_417_random_dir_unlucky.gif" width=400>
+
+<img alt="Maze 12 lucky" src="Images\GIFS\maze_209x209_4_goal_417_417_random_dir_lucky.gif" width=400> <img alt="Maze 12 solved" src="Mazes\maze-solved_209x209_4.png" width=400> <img alt="Maze 12 unlucky" src="Images\GIFS\maze_209x209_4_goal_417_417_random_dir_unlucky.gif" width=400>
 
 ### Maze with removed walls
 <img alt="Maze 7" src="Images\GIFS\maze_20x20_wout_walls_goal_39_39.gif" width=400> <img alt="Maze 7 solved" src="Mazes\Wout_walls\maze-solved_20x20_wout_walls.png" width=400>

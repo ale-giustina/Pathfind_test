@@ -150,7 +150,7 @@ showcolor = True #show the process in color
 
 debug = False #show (don't save) the final image
 
-
+random_dir = True #at intersections don't always go left
 
 try:
   lab = to_list(filepath)
@@ -218,8 +218,16 @@ while not found:
     #add the node to the list of nodes [position, [directions] <- True if possible, False if not]
     nodes.append([start,check_surroundings(start, lab)])
 
+    #if random_dir is True, choose a random direction, else go left
+    if random_dir:
+      possible_node_dir = [i for i, x in enumerate(nodes[-1][1]) if x == True]
+      choosen_dir = possible_node_dir[np.random.randint(0,len(possible_node_dir))]
+      facing.set(choosen_dir)
+    else:
+      facing.set(nodes[-1][1].index(True))
+
     #start going to the first possible direction
-    start = move(facing.set(nodes[-1][1].index(True)),start,lab)
+    start = move(facing.get(),start,lab)
 
     #add the move to the shortest path
     shortest_path.append([start])
@@ -229,7 +237,7 @@ while not found:
       vicolo_cieco = True
 
     #remove possible direction taken from the node
-    nodes[-1][1][nodes[-1][1].index(True)] = False
+    nodes[-1][1][choosen_dir] = False
 
     #if the algo has reached the goal, stop
     if lab[start[0]][start[1]] == 0.5:
@@ -252,14 +260,22 @@ while not found:
       lab = block_v(shortest_path[-1],lab)
       shortest_path.pop(-1)
     
+    #if random_dir is True, choose a random direction, else go left
+    if random_dir:
+      possible_node_dir = [i for i, x in enumerate(nodes[-1][1]) if x == True]
+      choosen_dir = possible_node_dir[np.random.randint(0,len(possible_node_dir))]
+      facing.set(choosen_dir)
+    else:
+      facing.set(nodes[-1][1].index(True))
+
     #move to the last node
-    start = move(facing.set(nodes[-1][1].index(True)),nodes[-1][0],lab)
+    start = move(facing.get(),nodes[-1][0],lab)
 
     #create a new path
     shortest_path.append([start])
 
     #remove possible direction taken from the node
-    nodes[-1][1][nodes[-1][1].index(True)] = False
+    nodes[-1][1][choosen_dir] = False
 
     #if the algo has reached the goal, stop
     if lab[start[0]][start[1]] == 0.5:
@@ -314,34 +330,38 @@ if found == True:
 else:
   print("labirinto non risolto")
 
-#add still frames to the end of the video
-lab_copy = [row.copy() for row in lab]
-if showcolor:
-  lab_copy = to_rgb(lab_copy)
-im = ax.imshow(lab_copy, animated=True)
-for i in range(60):
-  ims.append([im])
+if found == True or debug:
 
-print("saving... frames: " + str(len(ims)))
+  #add still frames to the end of the video
+  lab_copy = [row.copy() for row in lab]
+  if showcolor:
+    lab_copy = to_rgb(lab_copy)
+  im = ax.imshow(lab_copy, animated=True)
+  for i in range(60):
+    ims.append([im])
 
-print("saving video...")
+  print("saving... frames: " + str(len(ims)))
 
-#create the animation
-ani = animation.ArtistAnimation(fig, ims, interval=50, blit=True, repeat_delay=1000)
+  print("saving video...")
 
-if debug:
-  plt.show()
-  plt.close()
-else:
-  #save the animation
-  ani.save(filename=f"Video/{filename}.mp4", writer="ffmpeg")
+  #create the animation
+  ani = animation.ArtistAnimation(fig, ims, interval=50, blit=True, repeat_delay=1000)
 
-print("video saved")
-print("saving image...")
+  if random_dir: filename += "_random_dir"
 
-plt.close(fig)
+  if debug:
+    plt.show()
+    plt.close()
+  else:
+    #save the animation
+    ani.save(filename=f"Video/{filename}.mp4", writer="ffmpeg")
 
-#close the figure and save the final image
-ax, fig = plt.subplots(figsize=(23,23))
-im = plt.imshow(lab_copy)
-plt.savefig(f"Images/{filename}.png")
+  print("video saved")
+  print("saving image...")
+
+  plt.close(fig)
+
+  #close the figure and save the final image
+  ax, fig = plt.subplots(figsize=(23,23))
+  im = plt.imshow(lab_copy)
+  plt.savefig(f"Images/{filename}.png")
