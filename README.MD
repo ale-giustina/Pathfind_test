@@ -33,13 +33,17 @@ Almost all the mazes were generated with Kees Meijer maze generator found at htt
 ### Fully connected maze without removing walls (random_dir=True) lucky and unlucky scenarios
 
 Lucky scenario
+
 <img alt="Maze 11 lucky" src="Images\GIFS\maze_209x209_3_goal_417_417_random_dir_lucky.gif" width=400> <img alt="Maze 11 solved" src="Mazes\maze-solved_209x209_3.png" width=400> 
 Unlucky scenario
+
 <img alt="Maze 11 unlucky" src="Images\GIFS\maze_209x209_3_goal_417_417_random_dir_unlucky.gif" width=400>
 
 Lucky scenario
+
 <img alt="Maze 12 lucky" src="Images\GIFS\maze_209x209_4_goal_417_417_random_dir_lucky.gif" width=400> <img alt="Maze 12 solved" src="Mazes\maze-solved_209x209_4.png" width=400> 
 Unlucky scenario
+
 <img alt="Maze 12 unlucky" src="Images\GIFS\maze_209x209_4_goal_417_417_random_dir_unlucky.gif" width=400>
 
 ### Maze with removed walls
